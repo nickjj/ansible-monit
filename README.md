@@ -41,10 +41,10 @@ monit_alerts_on: true
 monit_alert_skip_when: "action, instance, pid, ppid"
 
 # The mail host name.
-monit_mail_host: localhost
+monit_mail_host: smtp.gmail.com
 
 # The mail port.
-monit_mail_port: 25
+monit_mail_port: 587
 
 # The mail username.
 monit_mail_username: you
@@ -53,7 +53,7 @@ monit_mail_username: you
 monit_mail_password: securepassword
 
 # Which mail encryption should be used?
-monit_mail_encryption: "" # SSLAUTO, SSLV2, SSLV3, TLSV1, TLSV11, TLSV12
+monit_mail_encryption: TLSV1 # SSLAUTO, SSLV2, SSLV3, TLSV1, TLSV11, TLSV12
 
 # Who should receive the alerts?
 monit_mail_alert_to: me@mydomain.com
