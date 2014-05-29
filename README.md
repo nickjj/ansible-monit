@@ -133,7 +133,7 @@ If you want your monit page to be accessible over ssl then you must generate a p
 
 You must run the following 2 commands:
 
-`$ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout monit.pem -out monit.pem`
+`$ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout monit.pem -out monit.pem`  
 `$ openssl gendh 512 >> monit.pem`
 
 Keep note of the path of where you created this file.
