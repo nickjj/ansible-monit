@@ -164,6 +164,10 @@ In order to run it you must specify an interval for which monit to run at. You a
 #### I can't access the web page with curl with ssl enabled
 You need to tell curl to run in insecure mode, `curl https://localhost:2812 --insecure`.
 
+## Ansible galaxy
+
+You can find it on the official [ansible galaxy](https://galaxy.ansible.com/list#/roles/949) if you want to rate it.
+
 ## License
 
 MIT
