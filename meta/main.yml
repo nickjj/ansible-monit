@@ -1,0 +1,17 @@
+---
+galaxy_info:
+  author: Nick Janetakis
+  description: Install monit and manage as many processes as you want.
+  company: 
+  license: license (MIT)
+  min_ansible_version: 1.5
+
+  platforms:
+  - name: Ubuntu
+    versions:
+    - all
+
+  categories:
+  - system
+
+dependencies: []

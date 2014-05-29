@@ -1,0 +1,37 @@
+---
+monit_interval: 60
+monit_start_delay: 30 # 0 to disable
+monit_logfile: syslog facility log_daemon
+monit_event_path: /var/lib/monit/events
+
+monit_alerts_on: true
+monit_alert_skip_when: "action, instance, pid, ppid"
+
+monit_mail_host: smtp.gmail.com
+monit_mail_port: 587
+monit_mail_username: you
+monit_mail_password: securepassword
+monit_mail_encryption: TLSV1 # SSLAUTO, SSLV2, SSLV3, TLSV1, TLSV11, TLSV12
+monit_mail_alert_to: me@mydomain.com
+monit_mail_default_from: monit@mydomain.com
+monit_mail_default_subject: "[Monit] $SERVICE $EVENT"
+monit_mail_default_message: "Monit $ACTION $SERVICE at $DATE on $HOST: $DESCRIPTION."
+
+monit_http_host: localhost
+monit_http_port: 2812
+monit_http_allow: ["localhost"]
+
+monit_http_ssl: false
+monit_http_local_pemfile_path: ~/dev/testproject/secrets/monit.pem
+
+monit_process_list:
+  # "myproc":
+  #   - check process foo with pidfile /full/path/to/foo.pid
+  #   -   start program = "/etc/init.d/foo start"
+  #   -   stop program = "/etc/init.d/foo stop"
+  # "some other proc (this is a comment in the monit config)":
+  #   - check process bar with pidfile /full/path/to/bar.pid
+  #   -   start program = "/etc/init.d/bar start" with timeout 60 seconds
+  #   -   stop program = "/etc/init.d/bar stop"
+  #   -   if cpu > 80% for 5 cycles then restart
+  #   -   if 3 restarts within 5 cycles then timeout

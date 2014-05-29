@@ -1,0 +1,51 @@
+# {{ ansible_managed }}
+# Manual customization of this file is not recommended.
+# Monit control file
+
+set daemon {{ monit_interval }}
+{% if monit_start_delay > 0 %}
+  with start delay {{ monit_start_delay }}
+{% endif %}
+
+set logfile {{ monit_logfile }}
+
+set mailserver {{ monit_mail_host}}
+  port {{ monit_mail_port }}
+  username "{{ monit_mail_username }}"
+  password "{{ monit_mail_password }}"
+{% if monit_mail_encryption != "" %}  using {{ monit_mail_encryption }}{{"\n"}}{% endif %}
+  with timeout 30 seconds
+
+set eventqueue
+  basedir {{ monit_event_path }}
+  slots 100
+
+set mail-format {
+  from: {{ monit_mail_default_from }}
+  reply-to: {{ monit_mail_default_from }}
+  subject: {{ monit_mail_default_subject }}
+  message: {{ monit_mail_default_message }}
+}
+
+{% if monit_alerts_on %}set alert {{ monit_mail_alert_to }} NOT ON { {{ monit_alert_skip_when }} }{% endif %}
+
+set httpd port {{ monit_http_port }}
+  use address {{ monit_http_host }}
+{% for item in monit_http_allow %}  allow {{ item }}{{"\n"}}{% endfor %}
+{% if monit_http_ssl %}  ssl enable
+  pemfile /etc/monit/monit.pem
+{% endif %}
+
+include /etc/monit/conf.d/*
+
+{% if monit_process_list is iterable %}
+{% for key, value in monit_process_list.items() %}
+# {{ key }}
+{% if value is iterable %}
+{% for k in value %}
+{{ k }}
+{% endfor %}
+{% endif %}
+
+{% endfor %}
+{% endif %}
