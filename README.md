@@ -95,6 +95,9 @@ monit_process_list:
   #   -   stop program = "/etc/init.d/bar stop"
   #   -   if cpu > 80% for 5 cycles then restart
   #   -   if 3 restarts within 5 cycles then timeout
+
+# The amount in seconds to cache apt-update.
+apt_cache_valid_time: 86400
 ```
 
 ## Example playbook without ssl

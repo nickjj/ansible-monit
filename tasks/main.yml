@@ -1,6 +1,6 @@
 ---
 - name: ensure monit is installed
-  apt: pkg=monit state=latest update_cache=true cache_valid_time=86400
+  apt: pkg=monit state=latest update_cache=true cache_valid_time={{ apt_cache_valid_time }}
   notify:
   - restart monit
 
