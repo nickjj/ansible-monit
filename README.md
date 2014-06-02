@@ -99,6 +99,10 @@ monit_process_list: |
 apt_cache_valid_time: 86400
 ```
 
+#### 2 ways of adding monit checks
+
+You can add the checks by overriding `monit_process_list` and supplying a text block as shown above or you can write out configs to `/etc/monit/conf.d` in your own ansible tasks.
+
 ## Example playbook without ssl
 
 For the sake of this example let's assume you have a group called **app** and you have a typical `site.yml` file.
