@@ -38,14 +38,4 @@ set httpd port {{ monit_http_port }}
 
 include /etc/monit/conf.d/*
 
-{% if monit_process_list is iterable %}
-{% for key, value in monit_process_list.items() %}
-# {{ key }}
-{% if value is iterable %}
-{% for k in value %}
-{{ k }}
-{% endfor %}
-{% endif %}
-
-{% endfor %}
-{% endif %}
+{{ monit_process_list }}

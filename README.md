@@ -83,18 +83,17 @@ monit_http_ssl: false
 monit_http_local_pemfile_path: ~/dev/testproject/secrets/monit.pem
 
 # Defaults to nothing but you can add as many monit tasks as you want.
-# The key is simply a comment so it's easier to separate your tasks.
-monit_process_list:
-  # "myproc":
-  #   - check process foo with pidfile /full/path/to/foo.pid
-  #   -   start program = "/etc/init.d/foo start"
-  #   -   stop program = "/etc/init.d/foo stop"
-  # "some other proc (this is a comment in the monit config)":
-  #   - check process bar with pidfile /full/path/to/bar.pid
-  #   -   start program = "/etc/init.d/bar start" with timeout 60 seconds
-  #   -   stop program = "/etc/init.d/bar stop"
-  #   -   if cpu > 80% for 5 cycles then restart
-  #   -   if 3 restarts within 5 cycles then timeout
+# Don't forget the | to enable text blocks, feel free to use template tags too.
+monit_process_list: |
+#  check process foo with pidfile /full/path/to/foo.pid
+#    start program = "/etc/init.d/foo start"
+#    stop program = "/etc/init.d/foo stop"
+
+#  check process bar with pidfile /full/path/to/bar.pid
+#    start program = "/etc/init.d/bar start" with timeout 60 seconds
+#    stop program = "/etc/init.d/bar stop"
+#    if cpu > 80% for 5 cycles then restart
+#    if 3 restarts within 5 cycles then timeout
 
 # The amount in seconds to cache apt-update.
 apt_cache_valid_time: 86400
