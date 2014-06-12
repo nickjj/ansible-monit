@@ -2,18 +2,18 @@
 - name: ensure monit is installed
   apt: pkg=monit state=latest update_cache=true cache_valid_time={{ apt_cache_valid_time }}
   notify:
-  - restart monit
+    - restart monit
 
 - name: ensure monit is configured
   template: src=monitrc.j2 dest=/etc/monit/monitrc group=root owner=root
   notify:
-  - restart monit
+    - restart monit
 
 - name: ensure monit pem is copied
   copy: src={{ monit_http_local_pemfile_path }} dest=/etc/monit/monit.pem mode=0600
   when: monit_http_ssl
   notify:
-  - restart monit
+    - restart monit
 
 - name: ensure monit starts on a fresh reboot
   service: name=monit state=started enabled=yes
