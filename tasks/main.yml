@@ -18,7 +18,3 @@
 
 - name: ensure monit starts on a fresh reboot
   service: name=monit state=started enabled=yes
-
-- name: ensure monit reloads itself when the configuration changes
-  command: monit reload
-  when: monit_config.changed
