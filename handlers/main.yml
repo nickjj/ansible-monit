@@ -1,3 +1,6 @@
 ---
-- name: reload monit
+- name: restart monit
   service: name=monit state=restarted
+
+- name: reload monit
+  service: name=monit state=reloaded
