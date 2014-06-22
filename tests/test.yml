@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  remote_user: travis
+  sudo: true
+  vars:
+    monit_process_list: |
+      check process postgresql with pidfile /var/run/postgresql/9.3-main.pid
+        start program = "/etc/init.d/postgresql start"
+        stop program = "/etc/init.d/postgresql stop"
+
+  roles:
+    - ansible-monit

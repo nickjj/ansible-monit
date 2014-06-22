@@ -1,4 +1,4 @@
-## What is ansible-monit?
+## What is ansible-monit? [![Build Status](https://secure.travis-ci.org/nickjj/ansible-monit.png)](http://travis-ci.org/nickjj/ansible-monit)
 
 It is an [ansible](http://www.ansible.com/home) role to install monit and allow you to easily manage as many processes as you want.
 
