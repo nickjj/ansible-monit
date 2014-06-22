@@ -8,7 +8,7 @@
   template: src=monitrc.j2 dest=/etc/monit/monitrc group=root owner=root
   register: monit_config
   notify:
-    - restart monit
+    - reload monit
 
 - name: ensure monit pem is copied
   copy: src={{ monit_http_local_pemfile_path }} dest=/etc/monit/monit.pem mode=0600
