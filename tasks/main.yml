@@ -10,10 +10,6 @@
   notify:
     - restart monit
 
-- name: ensure monit reloads itself when the configuration changes
-  command: monit reload
-  when: monit_config.changed
-
 - name: ensure monit pem is copied
   copy: src={{ monit_http_local_pemfile_path }} dest=/etc/monit/monit.pem mode=0600
   when: monit_http_ssl
@@ -22,3 +18,7 @@
 
 - name: ensure monit starts on a fresh reboot
   service: name=monit state=started enabled=yes
+
+- name: ensure monit reloads itself when the configuration changes
+  command: monit reload
+  when: monit_config.changed
