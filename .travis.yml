@@ -20,9 +20,8 @@ script:
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
-  # the test below fails on travis but it works locally on a fresh VM
-  # - >
-  #   sudo monit status
-  #   | grep -q 'postgresql'
-  #   && (echo 'Status test: pass' && exit 0)
-  #   || (echo 'Status test: fail' && exit 1)
+  - >
+    sudo monit status
+    | grep -q 'postgresql'
+    && (echo 'Status test: pass' && exit 0)
+    || (echo 'Status test: fail' && exit 1)
