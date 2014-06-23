@@ -3,6 +3,7 @@
   remote_user: travis
   sudo: true
   vars:
+    monit_start_delay: 0
     monit_process_list: |
       check process postgresql with pidfile /var/run/postgresql/9.3-main.pid
         start program = "/etc/init.d/postgresql start"

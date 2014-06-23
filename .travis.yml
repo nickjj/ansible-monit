@@ -24,5 +24,5 @@ script:
   # - >
   #   sudo monit status
   #   | grep -q 'postgresql'
-  #   && (echo 'Monit test: pass' && exit 0)
-  #   || (echo 'Monit test: fail' && exit 1)
+  #   && (echo 'Status test: pass' && exit 0)
+  #   || (echo 'Status test: fail' && exit 1)
