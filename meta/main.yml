@@ -12,6 +12,7 @@ galaxy_info:
     - all
 
   categories:
+  - monitoring
   - system
 
 dependencies: []
