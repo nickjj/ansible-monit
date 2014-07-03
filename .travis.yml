@@ -29,7 +29,7 @@ script:
     | grep -q 'ssh'
     && (echo 'Status test: pass' && exit 0)
     || (echo 'Status test: fail' && exit 1)
-  - ansible-playbook $SITE_AND_INVENTORY --connection=local --extra-vars '{"monit_process_list":["process": "ssh","pid_path": "/var/run/sshd.pid",delete: true]}'
+  - ansible-playbook $SITE_AND_INVENTORY --connection=local --extra-vars '{"monit_process_list":["process": "ssh","pid_path": "/var/run/sshd.pid","delete": "true"]}'
   - >
     sudo monit status
     | grep -q 'ssh'
