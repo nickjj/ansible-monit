@@ -128,6 +128,7 @@ monit_process_group_list:
     script:
 
     # Should monit stop monitoring this process?
+    # OPTIONAL: Defaults to false.
     delete: false
 ```
 
