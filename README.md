@@ -111,17 +111,17 @@ monit_process_group_list:
     # REQUIRED.
     pid_path: "/full/path/to/pid/file/foo.pid"
 
-    # What is the full path to start the program?
+    # What is the command to start the program?
     # OPTIONAL: Defaults to using init.d with the process name.
     start: "/etc/init.d/$process start"
 
-    # What is the full path to start the program?
+    # What is the command to stop the program?
     # OPTIONAL: Defaults to using init.d with the process name.
     stop: "/etc/init.d/$process stop"
 
     # How long in seconds should monit wait before it assumes the process timed out?
-    # OPTIONAL: Defaults to 0 (disabled).
-    timeout: 0
+    # OPTIONAL: Defaults to 60 (use 0 disabled).
+    timeout: 60
 
     # Additional monit configuration scripting.
     # OPTIONAL: Defaults to an empty string.
@@ -131,7 +131,7 @@ monit_process_group_list:
     delete: false
 ```
 
-The above would write out the configuration to `/etc/monit/conf.d/puma.conf`.
+The above would write out the configuration to `/etc/monit/conf.d/foo.conf`.
 
 #### Using a basic setup
 
