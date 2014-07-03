@@ -120,7 +120,7 @@ monit_process_group_list:
     stop: "/etc/init.d/$process stop"
 
     # How long in seconds should monit wait before it assumes the process timed out?
-    # OPTIONAL: Defaults to 60 (use 0 disabled).
+    # OPTIONAL: Defaults to 60 (use 0 to disable).
     timeout: 60
 
     # Additional monit configuration scripting.
