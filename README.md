@@ -95,6 +95,10 @@ monit_process_list: |
 #    if cpu > 80% for 5 cycles then restart
 #    if 3 restarts within 5 cycles then timeout
 
+# The same as `monit_process_list` except scoped to a specific group or host.
+monit_process_group_list:
+monit_process_host_list:
+
 # The amount in seconds to cache apt-update.
 apt_cache_valid_time: 86400
 ```

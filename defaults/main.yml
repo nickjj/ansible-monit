@@ -34,5 +34,7 @@ monit_process_list: |
 #    stop program = "/etc/init.d/bar stop"
 #    if cpu > 80% for 5 cycles then restart
 #    if 3 restarts within 5 cycles then timeout
+monit_process_group_list:
+monit_process_host_list:
 
 apt_cache_valid_time: 86400
