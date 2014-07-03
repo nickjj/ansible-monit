@@ -4,10 +4,10 @@
   sudo: true
   vars:
     monit_start_delay: 0
-    monit_process_list: |
-      check process postgresql with pidfile /var/run/postgresql/9.3-main.pid
-        start program = "/etc/init.d/postgresql start"
-        stop program = "/etc/init.d/postgresql stop"
+
+    monit_process_list:
+      - process: "ssh"
+        pid_path: "/var/run/sshd.pid"
 
   roles:
     - ansible-monit

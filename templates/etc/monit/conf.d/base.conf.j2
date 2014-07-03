@@ -1,0 +1,8 @@
+# {{ ansible_managed }}
+# manual customization of this file is not recommended
+
+check process {{ item.process }} with pidfile {{ item.pid_path }}
+  start program = "{{ item.start|default("/etc/init.d/" + item.process + " start") }}"{% if item.timeout|default("60") is defined and item.timeout|default("60") %} with timeout {{ item.timeout|default("60") }} seconds{% endif %}
+  
+  stop program = "{{ item.stop|default("/etc/init.d/" + item.process + " stop") }}"
+{% if item.script is defined and item.script %}{{ item.script|indent(2, true)}}{% endif %}

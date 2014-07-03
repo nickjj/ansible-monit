@@ -5,8 +5,31 @@
     - restart monit
 
 - name: ensure monit is configured
-  template: src=monitrc.j2 dest=/etc/monit/monitrc group=root owner=root
-  register: monit_config
+  template: src=etc/monit/monitrc.j2 dest=/etc/monit/monitrc
+  notify:
+    - reload monit
+
+- name: ensure monit process configs are removed
+  file: state=absent
+        path=/etc/monit/conf.d/{{ item.type|default("base") }}_{{ item.process }}.conf
+  with_flattened:
+    - monit_process_list
+    - monit_process_group_list
+    - monit_process_host_list
+  when: ((item.type|default("base") is defined and item.type|default("base")) and (item.process is defined and item.process) and (item.pid_path is defined and item.pid_path)) and
+        (item.delete is defined and item.delete)
+  notify:
+    - reload monit
+
+- name: ensure monit process configs are added
+  template: src=etc/monit/conf.d/{{ item.type|default("base") }}.conf.j2
+            dest=/etc/monit/conf.d/{{ item.type|default("base") }}_{{ item.process }}.conf
+  with_flattened:
+    - monit_process_list
+    - monit_process_group_list
+    - monit_process_host_list
+  when: (item.type|default("base") is defined and item.type|default("base") and item.process is defined and item.process and item.pid_path is defined and item.pid_path) and
+        (item.delete is undefined or (item.delete is defined and not item.delete))
   notify:
     - reload monit
 

@@ -82,30 +82,81 @@ monit_http_ssl: false
 # If ssl is enabled, what local pem file should it copy?
 monit_http_local_pemfile_path: ~/dev/testproject/secrets/monit.pem
 
-# Defaults to nothing but you can add as many monit tasks as you want.
-# Don't forget the | to enable text blocks, feel free to use template tags too.
-monit_process_list: |
-#  check process foo with pidfile /full/path/to/foo.pid
-#    start program = "/etc/init.d/foo start"
-#    stop program = "/etc/init.d/foo stop"
-
-#  check process bar with pidfile /full/path/to/bar.pid
-#    start program = "/etc/init.d/bar start" with timeout 60 seconds
-#    stop program = "/etc/init.d/bar stop"
-#    if cpu > 80% for 5 cycles then restart
-#    if 3 restarts within 5 cycles then timeout
-
-# The same as `monit_process_list` except scoped to a specific group or host.
-monit_process_group_list:
-monit_process_host_list:
+# The lists to monitor your own processes. This is explained more below.
+monit_process_list: []
+monit_process_group_list: []
+monit_process_host_list: []
 
 # The amount in seconds to cache apt-update.
 apt_cache_valid_time: 86400
 ```
 
-#### 2 ways of adding monit checks
+### Adding processes to the list
 
-You can add the checks by overriding `monit_process_list` and supplying a text block as shown above or you can write out configs to `/etc/monit/conf.d` in your own ansible tasks.
+In this example we will monitor 2 services that belong to an app server. It doesn't matter what they are doing, they just need to write out a pid file.
+
+Before we do anything, let's look at how you would define a process.
+
+```
+monit_process_group_list:
+    # Choose the template to use.
+    # OPTIONAL: Defaults to base. No other templates are supported yet.
+  - type: "base"
+
+    # What is the process that you want to monitor?
+    # REQUIRED.
+    process: "foo"
+
+    # What is the pid path for this process?
+    # REQUIRED.
+    pid_path: "/full/path/to/pid/file/foo.pid"
+
+    # What is the full path to start the program?
+    # OPTIONAL: Defaults to using init.d with the process name.
+    start: "/etc/init.d/$process start"
+
+    # What is the full path to start the program?
+    # OPTIONAL: Defaults to using init.d with the process name.
+    stop: "/etc/init.d/$process stop"
+
+    # How long in seconds should monit wait before it assumes the process timed out?
+    # OPTIONAL: Defaults to 0 (disabled).
+    timeout: 0
+
+    # Additional monit configuration scripting.
+    # OPTIONAL: Defaults to an empty string.
+    script:
+
+    # Should monit stop monitoring this process?
+    delete: false
+```
+
+The above would write out the configuration to `/etc/monit/conf.d/puma.conf`.
+
+#### Using a basic setup
+
+Open your inventory directory and goto `group_vars/app.yml` and then add this:
+
+```
+monit_process_group_list:
+  - process: "foo"
+    pid_path: "/full/path/to/pid/file/foo.pid"
+```
+
+#### Add multiple processes and your own custom scripting 
+
+Here is a brief example of adding multiple processes and your own custom monitoring script for one of them.
+
+```
+monit_process_group_list:
+  - process: "foo"
+    pid_path: "/full/path/to/pid/file/foo.pid"
+  - process: "bar"
+    pid_path: "/full/path/to/pid/file/bar.pid"
+    script: |
+      if cpu > 80% for 5 cycles then restart
+      if 3 restarts within 5 cycles then timeout
+```
 
 ## Example playbook without ssl
 
